@@ -1,12 +1,14 @@
-import express from "express";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-dotenv.config();
+const express = require('express');
+const mongoose = require('mongoose');
+const path = require('path');
+require('dotenv').config();
 
-import User from './models/User.js';
-import ServiceRequest from './models/ServiceRequest.js';
+const User = require('./models/User.js');
+const ServiceRequest = require('./models/ServiceRequest.js');
+
 
 const app = express()
+const_dirname = path.resolve();
 app.use(express.json());
 
 async function connectMongoDB() {
@@ -210,6 +212,15 @@ app.delete("/serviceRequest/:id", async(req, res)=>{
   
 
 const PORT = process.env.PORT || 5000;
+
+if(process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+
+  app.get('*', (req, res) => {
+     res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'))
+ });
+}
+
 
 app.listen(PORT, () => {
     console.log(`The server is Running on Port ${PORT} 🚀`);

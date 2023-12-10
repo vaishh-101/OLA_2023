@@ -1,4 +1,5 @@
-import { Schema, model } from "mongoose";
+const { Schema, model } = require("mongoose");
+
 
 const serviceRequestSchema = new Schema({
     type: {
@@ -39,4 +40,5 @@ const serviceRequestSchema = new Schema({
 
 const ServiceRequest = model("ServiceRequest", serviceRequestSchema);
 
-export default ServiceRequest;
+
+module.exports = ServiceRequest;

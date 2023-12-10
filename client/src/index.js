@@ -7,6 +7,7 @@ import Home from './views/Home/Home'
 import Signup from './views/Signup/Signup';
 import Login from './views/Login/Login';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
   {
